@@ -1,0 +1,16 @@
+{
+	"state": "production",
+	"organization": "gearboxworks",
+	"name": "caddy",
+	"version": "0.11.5",
+	"majorversion": "",
+	"latest": "",
+	"class": "webserver",
+	"network": "--network gearboxnet",
+	"ports": "-P",
+	"volumes": "",
+	"restart": "--restart no",
+	"args": "",
+	"env": "CADDY_VERSION"
+}
+

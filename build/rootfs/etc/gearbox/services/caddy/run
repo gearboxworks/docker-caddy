@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/usr/local/bin/caddy -conf /usr/local/etc/caddy.conf
+
