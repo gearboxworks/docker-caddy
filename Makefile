@@ -424,6 +424,26 @@ endif
 
 
 ################################################################################
+shell:
+	@make shell-real BUILD_TYPE="final" BUILD_TARGET="$@"
+
+shell-%:
+	@make shell-real BUILD_TYPE="$*"
+
+shell-real:
+	@make check-config BUILD_TYPE=$(BUILD_TYPE)
+	@echo "# Gearbox[$(IMAGE_NAME):$(VERSION)]: Running a quick shell for image."
+
+ifneq ($(SKIP),yes)
+	-@make create
+	-@make start
+	-@make ssh
+	-@make stop
+	-@make rm
+endif
+
+
+################################################################################
 # Container related commands.
 create:
 	@make check-config BUILD_TYPE=$(BUILD_TYPE) BUILD_TARGET="$@"

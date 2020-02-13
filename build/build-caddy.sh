@@ -6,10 +6,13 @@ test -f /build/include-me.sh && . /build/include-me.sh
 c_ok "Started."
 
 c_ok "Installing packages."
-APKS="$(cat /build/build-caddy.apks)"
-if [ "${APKS}" != "" ]
+if [ -f /build/build-caddy.apks ]
 then
-	apk update && apk add --no-cache ${APKS}; checkExit
+	APKS="$(cat /build/build-caddy.apks)"
+	if [ "${APKS}" != "" ]
+	then
+		apk update && apk add --no-cache ${APKS}; checkExit
+	fi
 fi
 
 if [ -f /build/build-caddy.env ]

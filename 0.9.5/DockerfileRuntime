@@ -22,6 +22,5 @@ RUN /bin/sh /build/build-caddy.sh
 
 # 6. Expose ports.
 EXPOSE 22 80 443 9970
-
-# 7. Set default command to exec.
+WORKDIR /home/gearbox
 
