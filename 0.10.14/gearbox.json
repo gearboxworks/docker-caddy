@@ -3,7 +3,7 @@
 	"organization": "gearboxworks",
 	"name": "caddy",
 	"version": "0.10.14",
-	"majorversion": "",
+	"majorversion": "0.10",
 	"latest": "",
 	"class": "webserver",
 	"network": "--network gearboxnet",
