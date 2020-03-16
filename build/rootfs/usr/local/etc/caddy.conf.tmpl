@@ -1,0 +1,33 @@
+{{ range $k, $v := $.Sites }}
+:80 {
+	tls off
+	root {{ $v.Dir }}
+	gzip
+	log stdout
+	errors stderr
+	rewrite {
+		to {path} {path}/ /index.php?{query}
+	}
+	{{ if $v.PHPFPM.Enable }}
+	fastcgi / {{ $v.PHPFPM.Host }}:{{ $v.PHPFPM.Port }} php {
+		index index.php
+	}
+	{{ end }}
+}
+
+:443 {
+	tls on
+	root {{ $v.Dir }}
+	gzip
+	log stdout
+	errors stderr
+	rewrite {
+		to {path} {path}/ /index.php?{query}
+	}
+	{{ if $v.PHPFPM.Enable }}
+	fastcgi / {{ $v.PHPFPM.Host }}:{{ $v.PHPFPM.Port }} php {
+		index index.php
+	}
+	{{ end }}
+}
+{{ end }}

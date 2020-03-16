@@ -1,4 +1,16 @@
 #!/bin/bash
 
+if [ -f /usr/local/etc/caddy.conf ]
+then
+	echo "# Config file found."
+
+elif [[ /usr/local/etc/caddy.conf.tmpl -nt /usr/local/etc/caddy.conf ]]
+then
+	echo "# Template hasn't changed - no update."
+
+else
+	JsonToConfig -json /usr/local/etc/caddy.conf.json -template /usr/local/etc/caddy.conf.tmpl -out /usr/local/etc/caddy.conf
+fi
+
 /usr/local/bin/caddy -conf /usr/local/etc/caddy.conf
 

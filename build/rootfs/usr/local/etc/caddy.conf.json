@@ -1,0 +1,14 @@
+{
+	"Sites": [
+		{
+			"Name": "Default project",
+			"Dir": "/project/gearbox/projects/default",
+			"Url": "https://gearbox.local/",
+			"PHPFPM": {
+				"Enable": true,
+				"Host": "172.42.0.1",
+				"Port": "9000"
+			}
+		}
+	]
+}

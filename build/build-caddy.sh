@@ -37,4 +37,6 @@ else
 	/usr/local/bin/caddy -version; checkExit
 fi
 
+JsonToConfig -json /usr/local/etc/caddy.conf.json -template /usr/local/etc/caddy.conf.tmpl -out /usr/local/etc/caddy.conf
+
 c_ok "Finished."

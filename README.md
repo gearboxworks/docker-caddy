@@ -1,3 +1,5 @@
+![release](https://github.com/gearboxworks/docker-caddy/workflows/release/badge.svg?event=release)
+
 ![Caddy 1.0.x](https://img.shields.io/badge/Caddy-1.0.x-green.svg)
 
 ![Gearbox](https://github.com/gearboxworks/gearbox.github.io/raw/master/Gearbox-100x.png)
