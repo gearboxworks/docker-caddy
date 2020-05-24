@@ -53,10 +53,13 @@ VERSIONS := $(subst /,, $(sort $(filter-out ./, $(dir $(wildcard *.*/) ) ) ) )
 endif
 
 
-.PHONY: init build push release clean list logs inspect test create shell run start stop rm
+.PHONY: init build push release clean list logs inspect test shell run start stop rm
 
 ################################################################################
 # Image related commands.
+.DEFAULT:
+	@make -k help
+
 default: all
 
 all:
@@ -65,6 +68,8 @@ all:
 help:
 	@echo "################################################################################"
 	@echo "init				- Initialize repository from TEMPLATE."
+	@echo "update				- Update repository TEMPLATE."
+	@echo "git-release			- Generate a repository release."
 	@echo ""
 	@echo "clean-[all | <VERSION>]		- Clean runtime container image."
 	@echo "build-[all | <VERSION>]		- Generate runtime container image."
@@ -100,6 +105,15 @@ init: *.json
 	@echo "Gearbox: Initialize repository."
 	@./bin/create-build.sh "all"
 	@./bin/create-version.sh "all"
+
+
+################################################################################
+update:
+	@./bin/TemplateUpdate.sh
+	@make init
+
+git-release:
+	@./bin/TemplateRelease.sh
 
 
 ################################################################################
@@ -175,13 +189,6 @@ test:
 	@./bin/$@.sh $(VERSION)
 test-%:
 	@./bin/test.sh "$*"
-
-
-################################################################################
-create:
-	@./bin/$@.sh $(VERSION)
-create-%:
-	@./bin/create.sh "$*"
 
 
 ################################################################################

@@ -1,3 +1,5 @@
+versions/*/logs/*.log
+logs*zip
 .*.swp
 *.OLD
 docker-template

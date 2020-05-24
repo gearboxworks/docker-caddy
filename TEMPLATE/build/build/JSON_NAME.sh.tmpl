@@ -8,31 +8,40 @@ c_ok "Started."
 c_ok "Installing packages."
 APKBIN="$(which apk)"
 if [ "${APKBIN}" != "" ]
-	if [ -f /etc/gearbox/build/{{ .Json.name }}.apks ]
+then
+	if [ -f /etc/gearbox/build/{{ .Json.meta.name }}.apks ]
 	then
-		APKS="$(cat /etc/gearbox/build/{{ .Json.name }}.apks)"
-		${APKBIN} update && ${APKBIN} add --no-cache ${APKS}; checkExit
+		APKS="$(cat /etc/gearbox/build/{{ .Json.meta.name }}.apks)"
+		${APKBIN} update && ${APKBIN} add --no-cache --virtual gearbox ${APKS}; checkExit
 	fi
 fi
 
 APTBIN="$(which apt-get)"
 if [ "${APTBIN}" != "" ]
-	if [ -f /etc/gearbox/build/{{ .Json.name }}.apt ]
+then
+	if [ -f /etc/gearbox/build/{{ .Json.meta.name }}.apt ]
 	then
-		DEBS="$(cat /etc/gearbox/build/{{ .Json.name }}.apt)"
+		DEBS="$(cat /etc/gearbox/build/{{ .Json.meta.name }}.apt)"
 		${APTBIN} update && ${APTBIN} install ${DEBS}; checkExit
 	fi
 fi
 
 
-if [ -f /etc/gearbox/build/{{ .Json.name }}.env ]
+if [ -f /etc/gearbox/build/{{ .Json.meta.name }}.env ]
 then
-	. /etc/gearbox/build/{{ .Json.name }}.env
+	. /etc/gearbox/build/{{ .Json.meta.name }}.env
 fi
 
 if [ ! -d /usr/local/bin ]
 then
 	mkdir -p /usr/local/bin; checkExit
 fi
+
+
+c_ok "Generate installed file list"
+c_ok "####################"
+apk info -v -R gearbox | sed 's/gearbox://' | xargs apk info -L | awk '/bin\//{print"/"$1}'
+c_ok "####################"
+
 
 c_ok "Finished."

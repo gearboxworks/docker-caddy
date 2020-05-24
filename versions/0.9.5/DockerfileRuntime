@@ -1,0 +1,80 @@
+
+################################################################################
+# WARNING: This file has been auto-generated. DO NOT EDIT: WARNING
+# Created on 2020-05-25T09:37:16+1000, using template:DockerfileRuntime.tmpl and json:gearbox.json
+# Plain Docker container for docker-caddy based off gearboxworks/gearbox-base:alpine-3.11
+
+ARG VERSION=0.9.5
+
+# 1. First reference the gearbox-base image.
+FROM gearboxworks/gearbox-base:alpine-3.11
+ARG VERSION
+ARG GEARBOX_ENTRYPOINT
+ARG GEARBOX_ENTRYPOINT_ARGS
+
+# 2. Set up env variables.
+MAINTAINER Gearbox Team <team@gearbox.works>
+ENV GEARBOX_CONTAINER_NAME "docker-caddy"
+ENV GEARBOX_CONTAINER_VERSION ${VERSION}
+ENV GEARBOX_ENTRYPOINT ${GEARBOX_ENTRYPOINT}
+ENV GEARBOX_ENTRYPOINT_ARGS ${GEARBOX_ENTRYPOINT_ARGS}
+LABEL gearbox.json='{"schema": "gear-2","meta": {"state": "production","organization": "gearboxworks","name": "caddy","label": "Caddy","info": "Caddy is a webserver written in GoLang.","description": ["Caddy 2 is a powerful, enterprise-ready, open source web server with automatic HTTPS written in Go"],"maintainer": "Gearbox Team <team@gearbox.works>","class": "webserver","refurl": "https://caddyserver.com/"},"build": {"ports": {"http": "80","https": "443"},"run": "","args": "","env": {"CADDY_USER": "gearbox"},"network": "--network gearboxnet","volumes": "","restart": "--restart no"},"run": {"commands": {"default": "/usr/bin/example","example": "/usr/bin/example"}},"project": {},"extensions": {},"versions": {"2.0.0": {"majorversion": "2.0","latest": true,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"},"1.0.4": {"majorversion": "1.0","latest": false,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"},"0.11.5": {"majorversion": "0.11","latest": false,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"},"0.10.14": {"majorversion": "0.10","latest": false,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"},"0.9.5": {"majorversion": "0.9","latest": false,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"},"0.8.3": {"majorversion": "0.8","latest": false,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"},"0.7.6": {"majorversion": "0.7","latest": false,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"},"0.6.0": {"majorversion": "0.6","latest": false,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"},"0.5.1": {"majorversion": "0.5","latest": false,"ref": "","base": "gearboxworks/gearbox-base:alpine-3.11"}}}'
+LABEL gearbox.version='0.9.5'
+ENV GEARBOX_VERSION "0.9.5"
+LABEL container.class="webserver"
+ENV GEARBOX_CLASS "webserver"
+LABEL container.description="[Caddy 2 is a powerful, enterprise-ready, open source web server with automatic HTTPS written in Go]"
+ENV GEARBOX_DESCRIPTION "[Caddy 2 is a powerful, enterprise-ready, open source web server with automatic HTTPS written in Go]"
+LABEL container.info="Caddy is a webserver written in GoLang."
+ENV GEARBOX_INFO "Caddy is a webserver written in GoLang."
+LABEL container.label="Caddy"
+ENV GEARBOX_LABEL "Caddy"
+LABEL container.maintainer="Gearbox Team <team@gearbox.works>"
+ENV GEARBOX_MAINTAINER "Gearbox Team <team@gearbox.works>"
+LABEL container.name="caddy"
+ENV GEARBOX_NAME "caddy"
+LABEL container.organization="gearboxworks"
+ENV GEARBOX_ORGANIZATION "gearboxworks"
+LABEL container.refurl="https://caddyserver.com/"
+ENV GEARBOX_REFURL "https://caddyserver.com/"
+LABEL container.state="production"
+ENV GEARBOX_STATE "production"
+LABEL container.args=""
+ENV GEARBOX_ARGS ""
+# SKIP env
+LABEL container.network="--network gearboxnet"
+ENV GEARBOX_NETWORK "--network gearboxnet"
+LABEL container.ports="map[http:80 https:443]"
+ENV GEARBOX_PORTS "map[http:80 https:443]"
+LABEL container.restart="--restart no"
+ENV GEARBOX_RESTART "--restart no"
+LABEL container.run=""
+ENV GEARBOX_RUN ""
+LABEL container.volumes=""
+ENV GEARBOX_VOLUMES ""
+LABEL container.base="gearboxworks/gearbox-base:alpine-3.11"
+ENV GEARBOX_BASE "gearboxworks/gearbox-base:alpine-3.11"
+LABEL container.latest="false"
+ENV GEARBOX_LATEST "false"
+LABEL container.majorversion="0.9"
+ENV GEARBOX_MAJORVERSION "0.9"
+LABEL container.ref=""
+ENV GEARBOX_REF ""
+ENV CADDY_USER "gearbox"
+
+# 3. Now copy the local files specific to this container.
+COPY build /etc/gearbox
+COPY versions/${VERSION}/build /etc/gearbox
+
+# 4. Run the base.sh script to set everything up.
+RUN /bin/sh /etc/gearbox/build/base.sh
+
+# 5. Run the caddy.sh script to set everything up.
+RUN /bin/sh /etc/gearbox/build/caddy.sh
+
+# 6. Expose ports.
+EXPOSE 22 9970 80 443 
+WORKDIR /home/gearbox/projects
+
+# END
+################################################################################

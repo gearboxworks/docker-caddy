@@ -1,0 +1,96 @@
+{
+	"schema": "gear-2",
+	"meta": {
+		"state": "production",
+		"organization": "gearboxworks",
+		"name": "caddy",
+		"label": "Caddy",
+		"info": "Caddy is a webserver written in GoLang.",
+		"description": [
+			"Caddy 2 is a powerful, enterprise-ready, open source web server with automatic HTTPS written in Go"
+		],
+		"maintainer": "Gearbox Team <team@gearbox.works>",
+		"class": "webserver",
+		"refurl": "https://caddyserver.com/"
+	},
+	"build": {
+		"ports": {
+			"http": "80",
+			"https": "443"
+		},
+		"run": "",
+		"args": "",
+		"env": {
+			"CADDY_USER": "gearbox"
+		},
+		"network": "--network gearboxnet",
+		"volumes": "",
+		"restart": "--restart no"
+	},
+	"run": {
+		"commands": {
+			"default": "/usr/bin/example",
+			"example": "/usr/bin/example"
+		}
+	},
+	"project": {
+	},
+	"extensions": {
+	},
+	"versions": {
+		"2.0.0": {
+			"majorversion": "2.0",
+			"latest": true,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		},
+		"1.0.4": {
+			"majorversion": "1.0",
+			"latest": false,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		},
+		"0.11.5": {
+			"majorversion": "0.11",
+			"latest": false,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		}
+		"0.10.14": {
+			"majorversion": "0.10",
+			"latest": false,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		}
+		"0.9.5": {
+			"majorversion": "0.9",
+			"latest": false,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		}
+		"0.8.3": {
+			"majorversion": "0.8",
+			"latest": false,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		}
+		"0.7.6": {
+			"majorversion": "0.7",
+			"latest": false,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		}
+		"0.6.0": {
+			"majorversion": "0.6",
+			"latest": false,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		}
+		"0.5.1": {
+			"majorversion": "0.5",
+			"latest": false,
+			"ref": "",
+			"base": "gearboxworks/gearbox-base:alpine-3.11"
+		}
+	}
+}
